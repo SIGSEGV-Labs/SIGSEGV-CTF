@@ -1,0 +1,390 @@
+/* ==========================================================================
+   Meridian County — public site stylesheet
+   Flat, document-led design. No gradients, no shadows, no glassmorphism.
+   ========================================================================== */
+
+:root {
+  --navy: #1c3d5a;
+  --navy-dark: #142c40;
+  --parchment: #f5f3ed;
+  --card: #ffffff;
+  --border: #d8d3c7;
+  --text: #24272b;
+  --text-muted: #5b5f63;
+  --brass: #a9812f;
+  --brass-dark: #8a6a24;
+
+  --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--parchment);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+a { color: var(--navy); }
+a:hover { color: var(--brass-dark); }
+
+img, svg { display: block; }
+
+.container {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------------------------------- Header --------------------------- */
+
+.site-header {
+  background: var(--navy);
+  border-bottom: 3px solid var(--brass);
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.brand-name {
+  font-family: var(--font-serif);
+  color: #fff;
+  font-size: 1.25rem;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.brand-name small {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #c7d2dc;
+  margin-top: 2px;
+}
+
+.site-nav {
+  display: flex;
+  gap: 28px;
+}
+
+.site-nav a {
+  color: #e4e9ee;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  color: #fff;
+  border-bottom-color: var(--brass);
+}
+
+/* Thin civic-notice strip under the header */
+.notice-strip {
+  background: #eef0e6;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  padding: 6px 0;
+}
+
+/* ---------------------------------- Hero ------------------------------ */
+
+.hero {
+  padding: 64px 0 48px;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.hero-text { max-width: 560px; }
+
+.eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brass-dark);
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.hero h1 {
+  font-family: var(--font-serif);
+  font-size: 2.4rem;
+  line-height: 1.2;
+  margin: 0 0 16px;
+  color: var(--navy-dark);
+}
+
+.hero p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  margin: 0 0 24px;
+}
+
+.seal {
+  flex-shrink: 0;
+}
+
+/* ---------------------------------- Buttons ---------------------------- */
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 11px 22px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 2px;
+}
+
+.btn-primary {
+  background: var(--navy);
+  color: #fff;
+}
+.btn-primary:hover { background: var(--navy-dark); color: #fff; }
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--navy);
+  color: var(--navy);
+}
+.btn-outline:hover { background: var(--navy); color: #fff; }
+
+/* ---------------------------------- Sections --------------------------- */
+
+.section {
+  padding: 56px 0;
+}
+
+.section + .section {
+  border-top: 1px solid var(--border);
+}
+
+.section-heading {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  color: var(--navy-dark);
+  margin: 0 0 8px;
+}
+
+.section-sub {
+  color: var(--text-muted);
+  margin: 0 0 32px;
+  max-width: 620px;
+}
+
+/* Quick services grid */
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 24px;
+}
+
+.card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  margin: 0 0 8px;
+  color: var(--navy-dark);
+}
+
+.card p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  margin: 0 0 14px;
+}
+
+.card a.card-link {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--brass-dark);
+}
+.card a.card-link:hover { text-decoration: underline; }
+
+/* Announcements list */
+
+.announcement-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--border);
+}
+
+.announcement-list li {
+  display: flex;
+  gap: 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.announcement-date {
+  flex-shrink: 0;
+  width: 100px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-family: var(--font-mono);
+  padding-top: 2px;
+}
+
+.announcement-body h4 {
+  margin: 0 0 4px;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.announcement-body p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Two-column content (about/contact) */
+
+.split {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 48px;
+}
+
+.info-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.info-list li {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.info-list li:first-child { padding-top: 0; }
+
+.info-list .label {
+  display: block;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+/* Simple form (contact page) */
+
+.form-field {
+  margin-bottom: 18px;
+}
+
+.form-field label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: 2px solid var(--navy);
+  outline-offset: 1px;
+}
+
+/* ---------------------------------- Footer ------------------------------ */
+
+.site-footer {
+  background: var(--navy-dark);
+  color: #c7d2dc;
+  padding: 36px 0 24px;
+  margin-top: 24px;
+  font-size: 0.85rem;
+}
+
+.site-footer .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.site-footer a { color: #dfe6ec; }
+
+.footer-cols { display: flex; gap: 56px; }
+
+.footer-col h5 {
+  color: #fff;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0 0 12px;
+}
+
+.footer-col ul { list-style: none; margin: 0; padding: 0; }
+.footer-col li { margin-bottom: 8px; }
+
+.footer-bottom {
+  border-top: 1px solid #2a4a68;
+  margin-top: 28px;
+  padding-top: 16px;
+  font-size: 0.78rem;
+  color: #8fa2b3;
+}
+
+/* ---------------------------------- Responsive --------------------------- */
+
+@media (max-width: 760px) {
+  .site-nav { gap: 16px; flex-wrap: wrap; }
+  .hero .container { flex-direction: column; align-items: flex-start; }
+  .grid-3 { grid-template-columns: 1fr; }
+  .split { grid-template-columns: 1fr; }
+  .site-footer .container { flex-direction: column; }
+  .footer-cols { gap: 32px; flex-wrap: wrap; }
+}

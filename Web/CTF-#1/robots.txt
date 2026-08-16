@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /legacy
+Disallow: /internal-docs
+Disallow: /admin
+Disallow: /old-site
+Disallow: /passwd
+Disallow: /staging

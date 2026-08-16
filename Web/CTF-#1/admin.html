@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Internal Admin Console</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root {
+    --bg: #1c2126;
+    --panel: #242a31;
+    --border: #3a4149;
+    --text: #e7eaed;
+    --muted: #9aa4ad;
+    --accent: #a9812f;
+    --error: #d15a52;
+    --success: #4c9a6a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+    padding: 24px;
+  }
+
+  .console-tag {
+    position: fixed;
+    top: 18px;
+    left: 24px;
+    font-family: "IBM Plex Mono", "Courier New", monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  .panel {
+    width: 100%;
+    max-width: 380px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 32px 30px;
+  }
+
+  .panel-header { margin-bottom: 24px; }
+
+  .panel-header h1 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0 0 6px;
+  }
+
+  .panel-header p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .field { margin-bottom: 16px; }
+
+  .field label {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .field input {
+    width: 100%;
+    padding: 10px 12px;
+    background: #171b1f;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: "IBM Plex Mono", "Courier New", monospace;
+    font-size: 0.9rem;
+  }
+
+  .field input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 11px;
+    margin-top: 6px;
+    background: var(--accent);
+    border: none;
+    color: #1c2126;
+    font-weight: 600;
+    font-size: 0.92rem;
+    cursor: pointer;
+  }
+  .submit-btn:hover { background: #c1954a; }
+
+  .error-msg {
+    margin-top: 14px;
+    font-size: 0.85rem;
+    color: var(--error);
+    display: none;
+  }
+  .error-msg.show { display: block; }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+  .panel.shake { animation: shake 0.28s ease-in-out; }
+
+  /* success state */
+  .success-panel { display: none; }
+  .success-panel.show { display: block; }
+  .login-panel.hide { display: none; }
+
+  .success-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--success);
+    border: 1px solid var(--success);
+    padding: 3px 8px;
+    margin-bottom: 14px;
+  }
+
+  .success-panel h1 {
+    font-size: 1.15rem;
+    margin: 0 0 8px;
+  }
+
+  .success-panel p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: 0 0 20px;
+  }
+
+  .flag-box {
+    background: #171b1f;
+    border: 1px solid var(--border);
+    padding: 14px;
+    font-family: "IBM Plex Mono", "Courier New", monospace;
+    font-size: 0.85rem;
+    color: #d8b970;
+    word-break: break-all;
+    margin-bottom: 14px;
+  }
+
+  .copy-btn {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .copy-btn:hover { background: rgba(169,129,47,0.12); }
+  .copy-btn.copied { border-color: var(--success); color: var(--success); }
+</style>
+</head>
+<body>
+
+<div class="console-tag">MERIDIAN COUNTY // INTERNAL-CONSOLE-01</div>
+
+<div class="panel login-panel" id="login-panel">
+  <div class="panel-header">
+    <h1>Internal Admin Console</h1>
+    <p>Restricted access. Authorized personnel only.</p>
+  </div>
+
+  <form id="login-form">
+    <div class="field">
+      <label for="name">Name</label>
+      <input type="text" id="name" autocomplete="off" required>
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input type="password" id="password" autocomplete="off" required>
+    </div>
+    <button type="submit" class="submit-btn">Sign in</button>
+    <div class="error-msg" id="error-msg">Access denied. Invalid credentials.</div>
+  </form>
+</div>
+
+<div class="panel success-panel" id="success-panel">
+  <span class="success-badge">Access granted</span>
+  <h1>Account successfully hacked</h1>
+  <p>Welcome, <span id="success-name"></span>. Authentication bypass confirmed — here's your proof of completion.</p>
+  <div class="flag-box" id="flag-output"></div>
+  <button class="copy-btn" id="copy-btn">Copy flag</button>
+</div>
+
+<script>
+  // ---- "encryption" used only to turn the entered name into a flag string ----
+  // Simple reversible XOR cipher + base64 encoding. Not real cryptography —
+  // just enough obfuscation that the flag isn't the plaintext name.
+  const XOR_KEY = "MeridianCTF2026";
+
+  function xorCipher(text, key) {
+    let out = "";
+    for (let i = 0; i < text.length; i++) {
+      out += String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+    }
+    return out;
+  }
+
+  function toBase64Utf8(str) {
+    return btoa(unescape(encodeURIComponent(str)));
+  }
+
+  function generateFlag(name) {
+    const cipher = xorCipher(name.trim(), XOR_KEY);
+    const encoded = toBase64Utf8(cipher);
+    return `FLAG{${encoded}}`;
+  }
+
+  // ---- auth check ----
+  // Password lives in the leaked /passwd.html config, discoverable only
+  // through recon (robots.txt / directory enumeration), never linked here.
+  const ADMIN_PASSWORD = "BrassSeal_2024!";
+
+  const loginForm = document.getElementById("login-form");
+  const loginPanel = document.getElementById("login-panel");
+  const errorMsg = document.getElementById("error-msg");
+  const successPanel = document.getElementById("success-panel");
+  const successName = document.getElementById("success-name");
+  const flagOutput = document.getElementById("flag-output");
+  const copyBtn = document.getElementById("copy-btn");
+
+  loginForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const name = document.getElementById("name").value;
+    const password = document.getElementById("password").value;
+
+    const nameValid = name.trim().length > 0;
+    const passwordValid = password === ADMIN_PASSWORD;
+
+    if (nameValid && passwordValid) {
+      successName.textContent = name.trim();
+      flagOutput.textContent = generateFlag(name);
+      loginPanel.classList.add("hide");
+      successPanel.classList.add("show");
+    } else {
+      errorMsg.classList.add("show");
+      loginPanel.classList.remove("shake");
+      // restart animation
+      void loginPanel.offsetWidth;
+      loginPanel.classList.add("shake");
+    }
+  });
+
+  copyBtn.addEventListener("click", async function () {
+    try {
+      await navigator.clipboard.writeText(flagOutput.textContent);
+    } catch (err) {
+      // fallback for environments without clipboard API access
+      const range = document.createRange();
+      range.selectNode(flagOutput);
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+      document.execCommand("copy");
+      window.getSelection().removeAllRanges();
+    }
+    copyBtn.textContent = "Copied";
+    copyBtn.classList.add("copied");
+    setTimeout(function () {
+      copyBtn.textContent = "Copy flag";
+      copyBtn.classList.remove("copied");
+    }, 1600);
+  });
+</script>
+
+</body>
+</html>
