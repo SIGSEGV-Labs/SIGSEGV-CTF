@@ -5,8 +5,8 @@
       "destination": "/admin.html"
     },
     {
-      "source": "/passwd",
-      "destination": "/passwd.html"
+      "source": "/password",
+      "destination": "/password.html"
     }
   ]
 }
