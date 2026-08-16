@@ -1,3 +1,3 @@
 # SIGSEGV-CTF
 Capture the Flag:
-This event is a used for solving cybersecurity problems
+This event is used for solving cybersecurity problems
