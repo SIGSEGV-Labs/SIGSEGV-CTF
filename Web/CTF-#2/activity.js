@@ -44,6 +44,7 @@ const LOG_ENTRIES = [
 ];
 
 const LOG_DIVIDER = true;
+const ATTACK_SOURCE_IP = '192.168.1.47';
 
 const SOURCE_BLOCK = [
   'SOURCE IP: 192.168.1.47',
@@ -59,7 +60,8 @@ function renderLog() {
   LOG_ENTRIES.forEach((entry) => {
     const line = document.createElement('div');
     line.className = `log-line ${entry.type === 'alert' ? 'alert' : entry.type === 'fail' ? 'fail' : entry.type === 'ok' ? 'ok' : ''}`;
-    line.innerHTML = `<span class="ts">[${entry.t}]</span> <span class="evt">${entry.text}</span>`;
+    const source = entry.type === 'fail' ? ` <span class="src">SRC ${ATTACK_SOURCE_IP}</span>` : '';
+    line.innerHTML = `<span class="ts">[${entry.t}]</span> <span class="evt">${entry.text}</span>${source}`;
     frag.appendChild(line);
   });
 
