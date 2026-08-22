@@ -3,5 +3,5 @@ Disallow: /legacy
 Disallow: /internal-docs
 Disallow: /admin
 Disallow: /old-site
-Disallow: /passwd
+Disallow: /password
 Disallow: /staging
