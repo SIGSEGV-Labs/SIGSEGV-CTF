@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Corvus Security Institute</title>
+<link rel="stylesheet" href="css/main.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+Pro:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body class="site">
+
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="site-logo">
+        <span class="mark">C</span>
+        <span class="name">Corvus Security Institute<small>Cyber Defense Education</small></span>
+      </a>
+      <nav class="site-nav" id="site-nav">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#programs">Programs</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="container">
+      <div>
+        <p class="hero-eyebrow">Est. 2014 &mdash; Applied Security Education</p>
+        <h1>Building the next generation of defenders.</h1>
+        <p class="lede">
+          Corvus Security Institute trains security analysts, IT professionals,
+          and engineering teams in the practical fundamentals of defensive
+          cybersecurity &mdash; from log analysis to incident response.
+        </p>
+        <div class="hero-actions">
+          <a href="#programs" class="btn btn-gold">Explore Programs</a>
+          <a href="#contact" class="btn btn-ghost">Talk to Admissions</a>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="stat"><span>Graduates trained</span><span class="num">4,200+</span></div>
+        <div class="stat"><span>Corporate partners</span><span class="num">85</span></div>
+        <div class="stat"><span>Years operating</span><span class="num">11</span></div>
+        <div class="stat"><span>Certification pass rate</span><span class="num">96%</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="container">
+      <p class="section-label">About the Institute</p>
+      <h2>A practical approach to security education</h2>
+      <p class="lede">
+        We believe security professionals are built through hands-on practice,
+        not lecture slides alone. Our curriculum blends classroom fundamentals
+        with realistic, guided exercises drawn from how real security teams
+        actually work.
+      </p>
+      <div class="about-grid">
+        <div class="about-card">
+          <p class="num">01</p>
+          <h3>Mission</h3>
+          <p>Equip learners with the practical judgment to detect, contain, and respond to real threats &mdash; not just recognize them on a slide.</p>
+        </div>
+        <div class="about-card">
+          <p class="num">02</p>
+          <h3>Faculty</h3>
+          <p>Instructors with backgrounds in security operations, incident response, and enterprise IT administration.</p>
+        </div>
+        <div class="about-card">
+          <p class="num">03</p>
+          <h3>Approach</h3>
+          <p>Every course pairs foundational theory with a guided lab environment so concepts are practiced, not just memorized.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="programs">
+    <div class="container">
+      <p class="section-label">Programs &amp; Training</p>
+      <h2>Where to start your track</h2>
+      <p class="lede">
+        Whether you're new to the field or sharpening operational skills, our
+        programs are structured around the way security teams actually
+        operate day to day.
+      </p>
+      <div class="programs-grid">
+        <div class="program-card">
+          <span class="tag">Foundations</span>
+          <h3>Defensive Security Fundamentals</h3>
+          <p>An introduction to monitoring, log analysis, and the core mindset behind protecting an organization's systems.</p>
+        </div>
+        <div class="program-card">
+          <span class="tag">Operations</span>
+          <h3>Security Operations Practice</h3>
+          <p>Learn how analysts triage alerts, investigate anomalies, and escalate incidents inside a live-feeling console.</p>
+        </div>
+        <div class="program-card">
+          <span class="tag">Hardening</span>
+          <h3>System Hardening &amp; Response</h3>
+          <p>Practical configuration review: closing unnecessary access, strengthening authentication, and verifying fixes.</p>
+        </div>
+      </div>
+
+      <div class="lab-callout">
+        <p>Current students can access the guided Security Lab environment to practice this term's monitoring exercise.</p>
+        <a href="/activity.html" class="btn btn-ghost">Security Lab &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact" style="border-bottom:none;">
+    <div class="container">
+      <p class="section-label">Contact</p>
+      <h2>Get in touch with admissions</h2>
+      <div class="contact-grid">
+        <div>
+          <div class="contact-detail">
+            <span class="icon">&#9993;</span>
+            <div>
+              <h4>Email</h4>
+              <p>admissions@corvus-institute.example</p>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <span class="icon">&#9742;</span>
+            <div>
+              <h4>Phone</h4>
+              <p>+1 (555) 019-2044</p>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <span class="icon">&#9873;</span>
+            <div>
+              <h4>Campus</h4>
+              <p>400 Meridian Way, Suite 220<br />Fairview, ST 00000</p>
+            </div>
+          </div>
+        </div>
+        <form class="contact-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Message sent';">
+          <label for="name">Full name</label>
+          <input id="name" type="text" placeholder="Jordan Ellis" />
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="you@example.com" />
+          <label for="message">Message</label>
+          <textarea id="message" rows="4" placeholder="I'd like to learn more about the Foundations program..."></textarea>
+          <button type="submit" class="btn btn-gold">Send message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>&copy; 2026 Corvus Security Institute. All rights reserved.</span>
+      <a href="#home">Back to top</a>
+    </div>
+  </footer>
+
+  <script>
+    const navToggle = document.getElementById('nav-toggle');
+    const siteNav = document.getElementById('site-nav');
+    navToggle.addEventListener('click', () => {
+      const isOpen = siteNav.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    siteNav.querySelectorAll('a').forEach((a) =>
+      a.addEventListener('click', () => {
+        siteNav.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      })
+    );
+  </script>
+</body>
+</html>

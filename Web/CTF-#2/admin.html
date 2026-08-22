@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Security Administration Console — Corvus Security Lab</title>
+<link rel="stylesheet" href="css/soc.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="soc" id="page-body" style="display:none;">
+
+  <div class="soc-topbar">
+    <a href="/" class="brand"><span class="soc-dot" id="topbar-dot"></span> CORVUS SECURITY LAB</a>
+    <nav>
+      <a href="/activity.html">Activity Monitor</a>
+      <a href="/">Exit Lab</a>
+    </nav>
+  </div>
+
+  <main class="soc-main">
+    <div class="soc-header">
+      <p class="soc-eyebrow">Module 02 &middot; Contain &amp; Harden</p>
+      <h1 class="soc-title">Security Administration Console</h1>
+      <p class="soc-subtitle">Threat confirmed from the Activity Monitor. Contain the source, then harden the system configuration.</p>
+    </div>
+
+    <div class="progress-trail">
+      <span id="trail-detect" class="done">Detected</span>
+      <span id="trail-investigate" class="done">Investigated</span>
+      <span id="trail-contain">Contained</span>
+      <span id="trail-harden">Hardened</span>
+      <span id="trail-verify">Verified</span>
+    </div>
+
+    <!-- Threat panel -->
+    <section class="soc-card glow" style="margin-top:20px;">
+      <p class="soc-card-title"><span class="soc-dot red" id="threat-dot"></span> Threats Detected: <span id="threat-count">1</span></p>
+
+      <div class="threat-grid">
+        <div class="threat-stat"><div class="label">IP Address</div><div class="value">192.168.1.47</div></div>
+        <div class="threat-stat"><div class="label">Status</div><div class="value" id="threat-status">ACTIVE</div></div>
+        <div class="threat-stat"><div class="label">Attempts</div><div class="value">37</div></div>
+        <div class="threat-stat"><div class="label">Threat Level</div><div class="value high" id="threat-level">HIGH</div></div>
+      </div>
+
+      <div id="pre-block">
+        <button class="soc-btn danger" id="block-btn">Block IP</button>
+      </div>
+
+      <div id="post-block" class="hidden">
+        <div class="feedback show success">
+          &#10003; IP BLOCKED<br /><br />
+          192.168.1.47 has been added to the firewall block list.<br /><br />
+          <strong>THREAT STATUS: <span class="status-pill contained">CONTAINED</span></strong>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hardening panel -->
+    <section class="soc-card" id="hardening-panel">
+      <p class="soc-card-title">Security Configuration</p>
+      <p style="font-size:12.5px; color:var(--soc-text-dim); margin:0 0 10px;">
+        Review the current configuration below. Toggle each item to reach a hardened state before running verification.
+      </p>
+
+      <ul class="hardening-list">
+        <li class="hardening-item">
+          <input type="checkbox" id="cfg-root" checked />
+          <label class="item-body" for="cfg-root">
+            <div class="item-title">Root login enabled</div>
+            <div class="item-note">Direct root/administrator login should be disabled; use a named account with elevated privileges instead.</div>
+          </label>
+        </li>
+        <li class="hardening-item">
+          <input type="checkbox" id="cfg-password" checked />
+          <label class="item-body" for="cfg-password">
+            <div class="item-title">Password authentication enabled</div>
+            <div class="item-note">Prefer stronger authentication (e.g. key-based or MFA) over password-only login.</div>
+          </label>
+        </li>
+        <li class="hardening-item">
+          <input type="checkbox" id="cfg-firewall" checked />
+          <label class="item-body" for="cfg-firewall">
+            <div class="item-title">Firewall enabled</div>
+            <div class="item-note">Keep the firewall active — this is already correctly configured.</div>
+          </label>
+        </li>
+        <li class="hardening-item">
+          <input type="checkbox" id="cfg-attempts" checked />
+          <label class="item-body" for="cfg-attempts">
+            <div class="item-title">Unlimited login attempts</div>
+            <div class="item-note">Login attempts should be rate-limited to prevent brute-force abuse.</div>
+          </label>
+        </li>
+        <li class="hardening-item">
+          <input type="checkbox" id="cfg-guest" checked />
+          <label class="item-body" for="cfg-guest">
+            <div class="item-title">Guest account enabled</div>
+            <div class="item-note">Disable unnecessary guest access to reduce the attack surface.</div>
+          </label>
+        </li>
+      </ul>
+
+      <div class="checklist-summary">
+        <ul id="summary-list"></ul>
+      </div>
+
+      <div class="feedback" id="hardening-feedback"></div>
+    </section>
+
+    <!-- Verification panel -->
+    <section class="soc-card" id="verify-panel">
+      <p class="soc-card-title">Incident Verification</p>
+      <p style="font-size:12.5px; color:var(--soc-text-dim); margin:0 0 14px;">
+        Confirm containment and hardening are complete, then run verification to close the incident.
+      </p>
+      <button class="soc-btn primary" id="verify-btn" disabled>Run Security Verification</button>
+      <div class="feedback" id="verify-feedback"></div>
+    </section>
+
+    <!-- Final code panel -->
+    <section class="soc-card glow hidden" id="code-panel">
+      <div class="code-reveal">
+        <p class="soc-card-title" style="justify-content:center;">System Secured</p>
+        <div style="font-size:12.5px; color:var(--soc-text-dim); text-align:left; max-width:320px; margin:0 auto;">
+          <div>&#10003; Threat identified</div>
+          <div>&#10003; Attacker IP identified</div>
+          <div>&#10003; Malicious IP blocked</div>
+          <div>&#10003; Authentication hardened</div>
+          <div>&#10003; System security improved</div>
+        </div>
+        <p style="margin-top:16px; font-size:12px; letter-spacing:0.08em; color:var(--soc-text-dim); text-transform:uppercase;">Incident Response Complete</p>
+        <p style="font-size:13px; color:var(--soc-text-dim); margin-bottom:0;">Your Security Code:</p>
+        <div class="code-value" id="final-code">------</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/state.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

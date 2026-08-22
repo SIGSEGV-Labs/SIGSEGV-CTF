@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Security Activity Monitor — Corvus Security Lab</title>
+<link rel="stylesheet" href="css/soc.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="soc">
+
+  <div class="soc-topbar">
+    <a href="/" class="brand"><span class="soc-dot"></span> CORVUS SECURITY LAB</a>
+    <nav>
+      <a href="/">Exit Lab</a>
+    </nav>
+  </div>
+
+  <main class="soc-main">
+    <div class="soc-header">
+      <p class="soc-eyebrow">Module 01 &middot; Detect &amp; Investigate</p>
+      <h1 class="soc-title">Security Activity Monitor</h1>
+      <p class="soc-subtitle">Live authentication log for <strong>auth-gateway-03</strong>. Review the events below and identify the source of the suspicious activity.</p>
+    </div>
+
+    <div id="denied-banner" class="alert-block hidden" style="margin-bottom:20px;">
+      Access to the Administration Console requires an identified threat. Complete the investigation below first.
+    </div>
+
+    <section class="soc-card glow">
+      <p class="soc-card-title"><span class="soc-dot"></span> Authentication Log &mdash; last 90 seconds</p>
+      <div class="log-console" id="log-console" aria-live="polite"></div>
+    </section>
+
+    <section class="soc-card">
+      <p class="soc-card-title">Investigation</p>
+      <p style="font-size:13px; color:var(--soc-text-dim); margin:0 0 4px;">
+        The log above shows repeated failed authentication attempts against a single privileged account, originating
+        from one consistent source. This pattern is characteristic of a <strong>brute-force authentication attack</strong>
+        &mdash; repeated credential guessing against a login endpoint, not a volumetric denial-of-service.
+      </p>
+      <p style="font-size:13px; color:var(--soc-text-dim);">Identify the suspicious IP address responsible for the failed admin logins.</p>
+
+      <div class="soc-field-row">
+        <input type="text" id="ip-input" class="soc-input" placeholder="e.g. 203.0.113.5" autocomplete="off" spellcheck="false" />
+        <button class="soc-btn" id="submit-ip">Submit Finding</button>
+      </div>
+
+      <div class="feedback" id="feedback"></div>
+
+      <div id="proceed-row" class="hidden" style="margin-top:16px;">
+        <a href="/admin.html" class="soc-btn primary" id="proceed-btn">Proceed to Admin Console &rarr;</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/state.js"></script>
+  <script src="js/activity.js"></script>
+</body>
+</html>
